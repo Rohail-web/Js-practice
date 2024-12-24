@@ -84,22 +84,46 @@
 // }
 // myasyncfunct();
 
-const promisesix = new Promise((res,rej)=>{
-    const error = true
-    if (!error) {
-        res({name : "rohail", email : "123@gmail.com"})
-    }else{
-        rej("Something was wrong")
-    }
+// const promisesix = new Promise((res,rej)=>{
+//     const error = true
+//     if (!error) {
+//         res({name : "rohail", email : "123@gmail.com"})
+//     }else{
+//         rej("Something was wrong")
+//     }
+// })
+// const myasyfunct = async () => {
+//     try {
+//         const response = await promisesix;
+//         console.log("resolve cleared :", response);
+        
+//     } catch (error) {
+//         console.log(error);
+        
+//     }
+// }
+// myasyfunct();
+
+const firstpro = fetch("https://jsonplaceholder.typicode.com/posts")
+firstpro
+.then((response)=>{
+ if (!response.ok) {
+    throw new Error("Something went wrong");
+ }
+ return response.json()
 })
-const myasyfunct = async () => {
-    try {
-        const response = await promisesix;
-        console.log("resolve cleared :", response);
-        
-    } catch (error) {
-        console.log(error);
-        
-    }
-}
-myasyfunct();
+.then((data)=>{
+    const specific_data = data.map((item)=>({
+        id : item.id,
+        title : item.title
+    }))
+    console.log(specific_data);
+})
+.catch((error)=>{
+    console.error(error);
+    
+})
+
+
+
+
